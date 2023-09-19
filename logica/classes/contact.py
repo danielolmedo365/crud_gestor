@@ -14,7 +14,7 @@ class Contact:
 
     @id_contact.setter
     def id_contact(self, name):
-        self._id_contact = id_contact
+        self._id_contact = name
 
     @property
     def name(self):

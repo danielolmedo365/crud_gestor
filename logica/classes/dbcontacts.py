@@ -2,7 +2,7 @@ from .contact import Contact
 # from .dbcsv import DBbyCSV
 from .dbpostgresql import DBPostgresql
 
-SCHEMA = {
+TABLE = {
     'id': {
         'type': 'autoincrement',
     }, 
@@ -31,7 +31,8 @@ SCHEMA = {
 class DBContacts(DBPostgresql):
 
     def __init__(self):
-        super().__init__(SCHEMA, 'contacts')
+        super().__init__(TABLE
+    , 'contacts')
 
     
     def save_contact(self, contact):
@@ -65,7 +66,8 @@ class DBContacts(DBPostgresql):
 
     
     def get_schema(self):
-        return SCHEMA
+        return TABLE
+    
 
 
     def search_contacts(self, filters):
