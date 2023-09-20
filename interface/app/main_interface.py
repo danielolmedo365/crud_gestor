@@ -21,11 +21,13 @@ class MainPage(QtWidgets.QMainWindow):
 
         # Changing the background color 
         self.setStyleSheet("background-color: #f2f2f2;")
-        self.pushButton.clicked.connect(self.update_registro)
+        self.pushButton_2.clicked.connect(self.update_registro)
+        
+
         
     def editar_registro(self):
         print("Agregando nuevo registro")
-        
+    
         
     def check_registro_data(self,message, data_name, force = True):
         print(message)
@@ -40,17 +42,10 @@ class MainPage(QtWidgets.QMainWindow):
             return  self.check_registro_data(message, data_name, force)
     def update_registro(self):
         #list_contacts()
-
-        print('Introduce el id del contacto que quieres actualizar:')
+        print('Introduce el Identificador de la organización que quieres actualizar:')
         id_org = input()
-        
-        
-        
-        
-        
-
         data = {}
-        nombre_organizacion = self.check_registro_data('introduce un nombre de organizacion (vacío para mantener los apellidos actuales):', 'nom_org', False)
+        nombre_organizacion = self.check_registro_data('introduce un nombre de organizacion (vacío para mantener el nombre actual):', 'nom_org', False)
         if nombre_organizacion:
             data['nom_org'] = nombre_organizacion
         

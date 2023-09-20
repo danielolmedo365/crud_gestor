@@ -18,7 +18,7 @@ class DBPostgresql:
 
         self._cur = self._connect.cursor()
         self._launch_query('SELECT 1')
-        print('Conexión establecida con éxito')
+        print("Conexion exitosa")
             
 
     #def __del__(self):
@@ -59,7 +59,7 @@ class DBPostgresql:
             list_update.append(f"{field_name}='{field_value}'")
         
 
-        query = f'''UPDATE "organizaciones".{self._table_name} SET {", ".join(list_update)} WHERE id_org = {id_object};'''
+        query = f'''UPDATE "organizaciones".{self._table_name} SET {", ".join(list_update)} WHERE id_org = '{id_object}';'''
         self._launch_query(query)
 
 
