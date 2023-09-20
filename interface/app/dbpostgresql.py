@@ -4,7 +4,7 @@ from environs import Env
 
 class DBPostgresql:
 
-    def __init__(self, estructura, table_name):
+    def __init__(self, estructura, table_name): 
         self._table_name = table_name
         self._estruct = estructura
         env = Env()
@@ -17,16 +17,10 @@ class DBPostgresql:
         )
 
         self._cur = self._connect.cursor()
-        self._launch_query('SELECT 1')
-        print("Conexion exitosa")
-            
-
+        
     #def __del__(self):
     #    self._connect.close()
     #    self._cur.close()
-
-
-
 
     def _launch_query(self, query):
         print(query)

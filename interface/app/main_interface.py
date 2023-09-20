@@ -2,15 +2,11 @@ from PyQt5 import QtWidgets, uic
 import os
 import time
 from validaciones import ValidacionesOrganizaciones
+from dbpostgresql import DBPostgresql
 
 validador = ValidacionesOrganizaciones()
 
 from dborganizaciones import DBOrganizaciones
-
-dborganizaciones=DBOrganizaciones()
-
-
-
 
 
 class MainPage(QtWidgets.QMainWindow):
@@ -18,16 +14,11 @@ class MainPage(QtWidgets.QMainWindow):
     def __init__(self):
         super(MainPage, self).__init__()
         uic.loadUi('interface/ui/main.ui', self)
-
         # Changing the background color 
         self.setStyleSheet("background-color: #f2f2f2;")
         self.pushButton_2.clicked.connect(self.update_registro)
+        self.dborganizaciones=DBOrganizaciones(self)         
         
-
-        
-    def editar_registro(self):
-        print("Agregando nuevo registro")
-    
         
     def check_registro_data(self,message, data_name, force = True):
         print(message)
@@ -50,7 +41,7 @@ class MainPage(QtWidgets.QMainWindow):
             data['nom_org'] = nombre_organizacion
         
         try:
-            res = dborganizaciones.update(id_org, data)
+            res = self.dborganizaciones.update(id_org, data)
             if res:
                 print('Contacto actualizado con éxito')
         except Exception as err:

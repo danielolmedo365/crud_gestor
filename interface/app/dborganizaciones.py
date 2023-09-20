@@ -146,12 +146,13 @@ TABLE = {
 
 class DBOrganizaciones(DBPostgresql):
 
-    def __init__(self):
+    def __init__(self, parent=None):
+        self.parent=parent
         super().__init__(TABLE, 'datos_generales')
+        self._launch_query('SELECT 2')
+        self.parent.label_2.setText('Estatus: Conexión exitosa')
 
-    
 
-    
     
     def update_contact(self, id_object, data):
         if not id_object:
