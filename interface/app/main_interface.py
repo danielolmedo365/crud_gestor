@@ -19,7 +19,8 @@ class MainPage(QtWidgets.QMainWindow):
         self.setStyleSheet("background-color: #f2f2f2;")
         self.pushButton_2.clicked.connect(self.add_element_dict_data)
         self.dborganizaciones=DBOrganizaciones(self)
-        self.emergente_update_organizaciones=DialogoEmerUpdateOrgs(self)         
+        self.emergente_update_organizaciones=DialogoEmerUpdateOrgs(self) 
+        self.emergente_update_organizaciones.pushButton.clicked.connect(self.printea)        
         
     def check_registro_data(self,message, data_name, force = True):
         print(message)
@@ -32,19 +33,24 @@ class MainPage(QtWidgets.QMainWindow):
         except ValueError as err:
             print(err)
             return  self.check_registro_data(message, data_name, force)
+    def printea(self):
+        id=self.emergente_update_organizaciones.lnd_id_org.text()
+        self.label_2.setText(id)
         
     def add_element_dict_data(self):
         self.emergente_update_organizaciones.show()
         self.emergente_update_organizaciones.label_4.setText("Inserta el ID de la organizacion que quieres modificar")
-        self.id_org = self.emergente_update_organizaciones.lnd_id_org.text()  
-        
-        
+        #self.id_org = self.emergente_update_organizaciones.get_id_busqueda()
+               
         """
         data = {}
         nombre_organizacion = self.check_registro_data('introduce un nombre de organizacion (vacío para mantener el nombre actual):', 'nom_org', False)
         if nombre_organizacion:
             data['nom_org'] = nombre_organizacion
         """
+
+            
+        
     def update_registro(self,id_org,data):        
               
         try:
