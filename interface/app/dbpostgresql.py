@@ -54,7 +54,10 @@ class DBPostgresql:
         
 
         query = f'''UPDATE "organizaciones".{self._table_name} SET {", ".join(list_update)} WHERE id_org = '{id_object}';'''
+        
         self._launch_query(query)
+        message="Registro actualizado correctamente"
+        return message
 
 
     def get_by_id(self, id_object):

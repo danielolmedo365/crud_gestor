@@ -3,6 +3,7 @@ import os
 import time
 from validaciones import ValidacionesOrganizaciones
 from dbpostgresql import DBPostgresql
+from forms.form_organizaciones import DialogoEmerUpdateOrgs
 
 validador = ValidacionesOrganizaciones()
 
@@ -16,9 +17,9 @@ class MainPage(QtWidgets.QMainWindow):
         uic.loadUi('interface/ui/main.ui', self)
         # Changing the background color 
         self.setStyleSheet("background-color: #f2f2f2;")
-        self.pushButton_2.clicked.connect(self.update_registro)
-        self.dborganizaciones=DBOrganizaciones(self)         
-        
+        self.pushButton_2.clicked.connect(self.add_element_dict_data)
+        self.dborganizaciones=DBOrganizaciones(self)
+        self.emergente_update_organizaciones=DialogoEmerUpdateOrgs(self)         
         
     def check_registro_data(self,message, data_name, force = True):
         print(message)
@@ -31,19 +32,25 @@ class MainPage(QtWidgets.QMainWindow):
         except ValueError as err:
             print(err)
             return  self.check_registro_data(message, data_name, force)
-    def update_registro(self):
-        #list_contacts()
-        print('Introduce el Identificador de la organización que quieres actualizar:')
-        id_org = input()
+        
+    def add_element_dict_data(self):
+        self.emergente_update_organizaciones.show()
+        self.emergente_update_organizaciones.label_4.setText("Inserta el ID de la organizacion que quieres modificar")
+        self.id_org = self.emergente_update_organizaciones.lnd_id_org.text()  
+        
+        
+        """
         data = {}
         nombre_organizacion = self.check_registro_data('introduce un nombre de organizacion (vacío para mantener el nombre actual):', 'nom_org', False)
         if nombre_organizacion:
             data['nom_org'] = nombre_organizacion
-        
+        """
+    def update_registro(self,id_org,data):        
+              
         try:
-            res = self.dborganizaciones.update(id_org, data)
-            if res:
-                print('Contacto actualizado con éxito')
+            res = self.dborganizaciones.update_org(id_org, data)
+            if res:                
+                self.label_2.setText(f'Estatus: {res}')
         except Exception as err:
             print(err)
             time.sleep(1)

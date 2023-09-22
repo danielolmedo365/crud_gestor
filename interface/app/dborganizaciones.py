@@ -154,12 +154,15 @@ class DBOrganizaciones(DBPostgresql):
 
 
     
-    def update_contact(self, id_object, data):
-        if not id_object:
-            raise ValueError('Debes envíar el id del contacto')
-        if not data:
-            raise ValueError('Debes envíar al menos un parámetro a actualizar')
-        self.update(id_object, data)
+    def update_org(self, id_object, data):
+        if not ((id_object ) or (data)):
+            if not id_object:
+                raise ValueError('Debes envíar el id del contacto')
+            if not data:
+                raise ValueError('Debes envíar al menos un parámetro a actualizar')
+        
+        return self.update(id_object, data)
+        
 
     """
     def save_contact(self, registro):

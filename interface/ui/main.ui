@@ -44,6 +44,19 @@
             <item>
              <widget class="QComboBox" name="comboBox"/>
             </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_5">
+              <property name="maximumSize">
+               <size>
+                <width>50</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Exp</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
           <item>
@@ -103,6 +116,19 @@
             </item>
             <item>
              <widget class="QComboBox" name="comboBox_4"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_6">
+              <property name="maximumSize">
+               <size>
+                <width>50</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Exp</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
