@@ -9,10 +9,13 @@ class DialogoEmerUpdateOrgs(QDialog):
 
         # Cargar el archivo .ui
         uic.loadUi("interface/ui/emergente_update_organizaciones.ui", self)
-        self.pushButton.clicked.connect(self.set_id_busqueda)
+        self.pbtn_ir.clicked.connect(self.get_id_busqueda)
+        self.frame_2.setEnabled(False)
+
         
-    def set_id_busqueda(self):
+    def get_id_busqueda(self):
         return self.lnd_id_org.text()
+
         
 
 

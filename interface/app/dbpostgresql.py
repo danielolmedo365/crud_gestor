@@ -1,6 +1,7 @@
 import psycopg2
 import re
 from environs import Env
+import pandas as pd
 
 class DBPostgresql:
 
@@ -22,12 +23,21 @@ class DBPostgresql:
     #    self._connect.close()
     #    self._cur.close()
 
-    def _launch_query(self, query):
-        print(query)
+    def _launch_query(self, query, return_df=False):
         self._cur.execute(query)
         matches = re.search(r"^SELECT", query, re.IGNORECASE)
+        
         if not matches:
             self._connect.commit()
+            return None  # No se retornará un DataFrame para consultas que no sean SELECT
+        
+        if return_df:
+            result = self._cur.fetchall()
+            column_names = [desc[0] for desc in self._cur.description]
+            df = pd.DataFrame(result, columns=column_names)
+            return df
+        else:
+            return None # No se retornará un DataFrame en este caso
 
 
     def insert(self, data):
@@ -74,6 +84,9 @@ class DBPostgresql:
             data[table_keys[key]] = value
 
         return data
+    def get_dataframe(self,query):
+        return self._launch_query(query,return_df=True)
+        
 
 
     def get_by_filters(self, filters=None):

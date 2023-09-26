@@ -162,8 +162,12 @@ class DBOrganizaciones(DBPostgresql):
                 raise ValueError('Debes envíar al menos un parámetro a actualizar')
         
         return self.update(id_object, data)
-        
-
+    def get_df_orgs(self,id=False):
+        if id:
+            df=self.get_dataframe(f'''SELECT * FROM "organizaciones".datos_generales WHERE id_org= '{id}' ''',)
+        else:
+            df=self.get_dataframe(f'''SELECT * FROM "organizaciones".datos_generales''',)
+        return df
     """
     def save_contact(self, registro):
         data = {
@@ -180,12 +184,12 @@ class DBOrganizaciones(DBPostgresql):
             raise ValueError('Debes envíar el id del contacto')
         self.delete(id_object)
 
-
+    """
     def list_contacts(self):
         list_contacts = self.get_all()
         return self._create_object_contacts(list_contacts)
 
-    
+    """
     def get_schema(self):
         return TABLE
     
