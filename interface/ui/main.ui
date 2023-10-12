@@ -70,6 +70,46 @@
           </item>
           <item>
            <widget class="QTableWidget" name="tableWidget">
+            <property name="palette">
+             <palette>
+              <active>
+               <colorrole role="Light">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>222</red>
+                  <green>221</green>
+                  <blue>218</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </active>
+              <inactive>
+               <colorrole role="Light">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>222</red>
+                  <green>221</green>
+                  <blue>218</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </inactive>
+              <disabled>
+               <colorrole role="Light">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>222</red>
+                  <green>221</green>
+                  <blue>218</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </disabled>
+             </palette>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
             <attribute name="horizontalHeaderVisible">
              <bool>true</bool>
             </attribute>
@@ -128,7 +168,18 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="comboBox_4"/>
+             <widget class="QComboBox" name="comboBox_4">
+              <item>
+               <property name="text">
+                <string>Municipios</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Nucleos agrarios</string>
+               </property>
+              </item>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="pushButton_6">

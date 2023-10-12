@@ -28,12 +28,14 @@ class MainPage(QtWidgets.QMainWindow):
         # Configurar la tabla para no permitir la edición de celdas
         self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.emergente_update_organizaciones.pbtn_ir.clicked.connect(self.habilitar_edicion)
+        
+        self.emergente_update_organizaciones.pushButton.clicked.connect(self.update_registro)
     
       
         
                 
     def check_registro_data(self,message, data_name, force = True):
-        print(message)
+        self.emergente_update_organizaciones.label_4.setText(message)
         input_data = input()
         if not force and not input_data:
             return
@@ -68,9 +70,10 @@ class MainPage(QtWidgets.QMainWindow):
         else:
             self.emergente_update_organizaciones.label_4.setText(f'{id_org} NO ES UN ID VALIDO')
             self.emergente_update_organizaciones.frame_2.setEnabled(False)
-            self.emergente_update_organizaciones.pushButton.setEnabled(False)   
+            self.emergente_update_organizaciones.pushButton.setEnabled(False)
        
-    def update_registro(self):                    
+    def update_registro(self):
+        id_org=0                    
         data = {}
         nombre_organizacion = self.check_registro_data('introduce un nombre de organizacion (vacío para mantener el nombre actual):', 'nom_org', False)
         if nombre_organizacion:
@@ -88,6 +91,7 @@ class MainPage(QtWidgets.QMainWindow):
 
     
     def selector_organizacion(self):
+        
         try:
             self.df_organizaciones=self.dborganizaciones.get_df_orgs()
             self.insertar_columna_en_combobox(self.comboBox,self.df_organizaciones, 'nom_org')

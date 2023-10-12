@@ -1,49 +1,24 @@
 import sys
-import pandas as pd
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWebEngineView
+from PyQt5.QtCore import QUrl
 
-# Ejemplo de un DataFrame de Pandas
-data = {'Nombre': ['Juan', 'María', 'Pedro'],
-        'Edad': [25, 30, 35],
-        'Ciudad': ['Madrid', 'Barcelona', 'Valencia']}
-
-df = pd.DataFrame(data)
-
-class MiVentana(QMainWindow):
+class MapApp(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setGeometry(100, 100, 600, 400)
+        # Crear una instancia del widget QWebEngineView
+        self.web_view = QWebEngineView(self)
+        self.web_view.setGeometry(0, 0, 800, 600)  # Establece la geometría del widget
+        self.setCentralWidget(self.web_view)
 
-        self.central_widget = QWidget(self)
-        self.setCentralWidget(self.central_widget)
+        # Cargar una página web, como Google Maps
+        self.web_view.setUrl(QUrl("https://www.google.com/maps"))
 
-        self.layout = QVBoxLayout(self.central_widget)
-
-        self.table_widget = QTableWidget()
-        self.layout.addWidget(self.table_widget)
-
-        self.insertar_dataframe_en_tabla(df)
-
-    def insertar_dataframe_en_tabla(self, dataframe):
-        # Obtener el número de filas y columnas del DataFrame
-        num_filas, num_columnas = dataframe.shape
-
-        # Configurar la tabla para tener el mismo número de filas y columnas que el DataFrame
-        self.table_widget.setRowCount(num_filas)
-        self.table_widget.setColumnCount(num_columnas)
-
-        # Convertir el DataFrame en una lista de listas
-        data_list = dataframe.values.tolist()
-
-        # Llenar la tabla en lotes
-        for row in range(num_filas):
-            for col in range(num_columnas):
-                item = QTableWidgetItem(str(data_list[row][col]))
-                self.table_widget.setItem(row, col, item)
-
-if __name__ == "__main__":
+def main():
     app = QApplication(sys.argv)
-    ventana = MiVentana()
-    ventana.show()
+    window = MapApp()
+    window.show()
     sys.exit(app.exec_())
+
+if __name__ == '__main__':
+    main()
